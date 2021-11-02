@@ -263,7 +263,7 @@ const ShowMoreBox = styled.div`
   margin: 60px 0;
 
   @media screen and (max-width: 885px) {
-    margin: 10px 0;
+    margin: 60px 0 50px 0;
   }
 `;
 
@@ -477,6 +477,8 @@ export default function Home() {
     <>
       <MainAnnouncement />
       <MainPost />
+      <LazyPost />
+      <BlockDiv />
       <LazyPost />
       <MiddleAdvertise alt="advertiseGames" src={advertise} />
       <Latest>LATEST</Latest>
