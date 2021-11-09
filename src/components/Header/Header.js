@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import logo from "../../images/logo.png";
 import menu from "../../images/menu.svg";
+import { Link } from "react-router-dom"
 
 const HeaderBox = styled.div`
   display: flex;
@@ -71,6 +72,10 @@ const SubTitleRWD = styled.div`
   ${(props) => props.$move && `height:46px`}
 `;
 
+const Goto = styled(Link)`
+
+`
+
 const LogoImg = styled.img`
   cursor: pointer;
   max-width: 150px;
@@ -120,7 +125,9 @@ export default function Header() {
       <HeaderBox>
         <HeaderRWD>
           <Menu onClick={optionChange} src={menu} />
-          <LogoImg alt="PlayGames" src={logo} />
+          <Goto to="./">
+            <LogoImg alt="PlayGames" src={logo} />
+          </Goto>
         </HeaderRWD>
         <SubTitleBox>
           <SubTitle>Top Games</SubTitle>
