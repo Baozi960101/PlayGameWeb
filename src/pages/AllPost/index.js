@@ -1,1 +1,1 @@
-export { default } from "../AllPost/AllPost"
+export { default } from "../AllPost/AllPost";

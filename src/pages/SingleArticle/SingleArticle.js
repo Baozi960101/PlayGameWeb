@@ -1,17 +1,9 @@
-import React, { lazy, Suspense } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import advertise from "../../images/advertise.webp";
-import singleArticleTest from "../../images/singleArticleTest.jpg";
-
-const Post = lazy(() => import("../Home/Post"));
-
-const LazyPost = () => {
-  return (
-    <Suspense fallback={<p>Loading....</p>}>
-      <Post></Post>
-    </Suspense>
-  );
-};
+import { MainPostContent } from "../../global/Post";
+import { FetchTestAPI, AloneApi } from "../../global/API";
+import { SlugContext } from "../../global/context";
 
 const MainBox = styled.div`
   display: flex;
@@ -26,8 +18,17 @@ const MainBox = styled.div`
   }
 `;
 
+const ArticleCoverBox = styled.div`
+  width: 100%;
+  height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+`;
+
 const ArticleCover = styled.img`
-  max-width: 100%;
+  width: 100%;
 `;
 
 const ArticleTitle = styled.div`
@@ -44,7 +45,7 @@ const ArticleContent = styled.div`
   font-size: 24px;
   font-weight: 400;
   margin: 20px 0;
-  line-height: 1.33;
+  line-height: 1.65;
 
   & + & {
     margin-top: 10px;
@@ -68,51 +69,81 @@ const MoreLikeThis = styled.div`
   letter-spacing: 1px;
 `;
 
+const Box = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1230px;
+  padding: 0px 15px;
+  margin: 0 auto;
+  box-sizing: border-box;
+`;
+
+const MainSinglePost = ({ src, title, content }) => {
+  return (
+    <MainBox>
+      <ArticleCoverBox>
+        <ArticleCover src={src} />
+      </ArticleCoverBox>
+      <ArticleTitle>{title}</ArticleTitle>
+      <ArticleContent>{content}</ArticleContent>
+    </MainBox>
+  );
+};
+
 export default function SingleArticle() {
+  const { aloneSlug } = useContext(SlugContext);
+  const [singlePost, setSinglePost] = useState([]);
+  const [post, setPost] = useState([]);
+
+  useEffect(() => {
+    if (aloneSlug !== "") {
+      fetch(AloneApi(aloneSlug))
+        .then((res) => res.json())
+        .then((data) => {
+          setSinglePost([data.data]);
+        });
+    }
+    return () => {};
+  }, [aloneSlug]);
+
+  useEffect(() => {
+    FetchTestAPI().then((data) => {
+      setPost(data.data.slice(0, 3));
+    });
+  }, []);
+
   return (
     <>
-      <MainBox>
-        <ArticleCover src={singleArticleTest} />
-        <ArticleTitle>
-          India squad for World Cup 2021: All you need to know
-        </ArticleTitle>
-        <ArticleContent>
-          The suspense around the Indian squad for the upcoming World Cup 2021,
-          to be played in the United Arab Emirates from October 14 to November
-          17, was over on Wednesday night as the selectors announced the list of
-          players who will be making the trip to the World Cup, first such
-          tournament to be played since the one India hosted in mid-2016.
-        </ArticleContent>
-        <ArticleContent>
-          The Indian selectors sprang quite a few surprises in their
-          announcement of the Indian squad for the World Cup. While Ravichandran
-          Ashwin made a comeback to the Indian side in the shortest format, the
-          biggest news was perhaps the inclusion of former captain and World Cup
-          winner Mahendra Singh Dhoni in the team.
-        </ArticleContent>
-        <ArticleContent>
-          Dhoni has joined the Indian team in the capacity of a team mentor for
-          the upcoming World Cup, joining forces with many of his former
-          teammates and coach Ravi Shastri, whose contract is set to end after
-          the event in the UAE.
-        </ArticleContent>
-        <ArticleContent>
-          There were also some big names missing from the team. The selectors
-          did not include opening batsman Shikhar Dhawan, India’s highest
-          wicket-taker in the format, Yuzvendra Chahal as well as Deepak Chahar
-          in their squad.
-        </ArticleContent>
-        <ArticleTitle>India Squad for World Cup</ArticleTitle>
-        <ArticleContent>
-          Virat Kohli (c), Rohit Sharma, KL Rahul, Suryakumar Yadav, Rishabh
-          Pant (wk), Ishan Kishan (wk), Hardik Pandya, Ravindra Jadeja, Rahul
-          Chahar, Ravichandran Ashwin, Axar Patel, Varun Chakravarthy, Jasprit
-          Bumrah, Bhuvneshwar Kumar, Mohammed Shami.
-        </ArticleContent>
-      </MainBox>
+      {singlePost.length !== 0 &&
+        singlePost.map((data) => {
+          return (
+            <MainSinglePost
+              key={data.crawler_No}
+              src={data.crawler_PicUrl}
+              title={data.crawler_Title}
+              content={data.crawler_Content}
+            />
+          );
+        })}
       <MiddleAdvertise src={advertise} />
       <MoreLikeThis>More Like This</MoreLikeThis>
-      <LazyPost />
+      <Box>
+        {post.length !== 0 &&
+          post.map((data) => {
+            return (
+              <MainPostContent
+                to={data.crawler_No}
+                key={data.crawler_No}
+                src={data.crawler_PicUrl}
+                title={data.crawler_Title.substring(0, 10)}
+                content={data.crawler_Content.substring(0, 70)}
+                name={data.crawler_Web}
+                time={data.crawler_Date}
+              />
+            );
+          })}
+      </Box>
     </>
   );
 }

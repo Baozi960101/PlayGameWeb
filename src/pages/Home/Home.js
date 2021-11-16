@@ -1,27 +1,15 @@
-import React, { lazy, Suspense } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import trending from "../../images/trending.png";
 import { Slideshow } from "./Slideshow";
-import coverImg from "../../images/cover.jpeg";
-import star from "../../images/star.png";
 import advertise from "../../images/advertise.webp";
-import { Link } from "react-router-dom"
-
-const Post = lazy(() => import("./Post"));
-
-const LazyPost = () => {
-  return (
-    <Suspense fallback={<p>Loading....</p>}>
-      <Post></Post>
-    </Suspense>
-  );
-};
-
+import { Link } from "react-router-dom";
+import { MainPostContent, MainCoverPost } from "../../global/Post";
+import { FetchTestAPI, FetchTestAPI02 } from "../../global/API";
 
 const Goto = styled(Link)`
-  text-decoration:none;
-`
-
+  text-decoration: none;
+`;
 
 const Announcement = styled.div`
   display: flex;
@@ -82,116 +70,15 @@ const MainAnnouncement = () => {
   );
 };
 
-const MainPostBox = styled.div`
+const Box = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
   max-width: 1230px;
-  margin: 70px auto;
   padding: 0px 15px;
+  margin: 0 auto;
   box-sizing: border-box;
-
-  @media screen and (max-width: 885px) {
-    margin-bottom: 40px;
-  }
 `;
-
-const MainPostImg = styled.img`
-  max-width: 60%;
-  cursor: pointer;
-
-  @media screen and (max-width: 885px) {
-    max-width: 100%;
-  }
-`;
-
-const Box = styled.div`
-  width: 35%;
-  padding-left: 25px;
-
-  @media screen and (max-width: 885px) {
-    width: 100%;
-    padding-left: 0px;
-    margin-top: 50px;
-  }
-`;
-
-const MainPostTitle = styled.h1`
-  font-size: 26px;
-  font-weight: 700;
-  margin-top: 0;
-  cursor: pointer;
-
-  @media screen and (max-width: 885px) {
-    font-size: 20px;
-  }
-`;
-const SubTitle = styled.p`
-  font-size: 16px;
-  font-weight: 500;
-  color: #70706e;
-  margin: 20px 0;
-
-  @media screen and (max-width: 885px) {
-    font-size: 14px;
-  }
-`;
-
-const MarkBox = styled.div`
-  display: flex;
-`;
-const Img = styled.img`
-  width: 44px;
-  margin-right: 30px;
-`;
-
-const MarkTitle = styled.div`
-  color: #ee3124;
-  font-size: 14px;
-  font-weight: 500;
-  margin-bottom: 5px;
-`;
-
-const MarkSubTitle = styled.div`
-  color: #70706e;
-  font-size: 14px;
-  font-weight: 500;
-`;
-
-const MainPostText = () => {
-  return (
-    <>
-      <Box>
-        <MainPostTitle>
-          India squad for Cricket T20 World Cup 2021: All you need to know
-        </MainPostTitle>
-        <SubTitle>
-          The suspense around the Indian squad for the upcoming Cricket T20
-          World Cup 2021, to be played in the United Arab Emirates from October
-          14 to November 17, was over on Wednesday night as the selectors
-          announced the list of players who will be making the trip to the T20
-        </SubTitle>
-        <MarkBox>
-          <Img src={star} />
-          <div>
-            <MarkTitle>Devarchit Varma</MarkTitle>
-            <MarkSubTitle>Sep 09 | 5 mins</MarkSubTitle>
-          </div>
-        </MarkBox>
-      </Box>
-    </>
-  );
-};
-
-export const MainPost = () => {
-  return (
-    <>
-      <MainPostBox>
-        <MainPostImg alt="Games" src={coverImg} />
-        <MainPostText />
-      </MainPostBox>
-    </>
-  );
-};
 
 const MiddleAdvertise = styled.img`
   width: 100%;
@@ -200,60 +87,13 @@ const MiddleAdvertise = styled.img`
 `;
 
 const Latest = styled.div`
-  margin: 0 auto 50px auto;
-  padding-bottom: 15px;
+  margin: 0 auto 10px auto;
   max-width: 1230px;
   padding: 0px 15px 20px 15px;
   box-sizing: border-box;
   font-size: 40px;
   border-bottom: 2px solid #c4c4c4;
   letter-spacing: 1px;
-`;
-
-const MiddlePostBox = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 1230px;
-  margin: 0px auto 70px auto;
-  padding: 0px 15px;
-  box-sizing: border-box;
-
-  @media screen and (max-width: 885px) {
-    margin-bottom: 10px;
-  }
-`;
-
-const MiddlePostText = () => {
-  return (
-    <>
-      <MiddlePostBox>
-        <MainPostTitle>
-          India squad for Cricket T20 World Cup 2021: All you need to know
-        </MainPostTitle>
-        <SubTitle>
-          The suspense around the Indian squad for the upcoming Cricket T20
-          World Cup 2021, to be played in the United Arab Emirates from October
-          14 to November 17, was over on Wednesday night as the selectors
-          announced the list of players who will be making the trip to the T20
-        </SubTitle>
-        <MarkBox>
-          <Img src={star} />
-          <div>
-            <MarkTitle>Devarchit Varma</MarkTitle>
-            <MarkSubTitle>Sep 09 | 5 mins</MarkSubTitle>
-          </div>
-        </MarkBox>
-      </MiddlePostBox>
-    </>
-  );
-};
-
-const BlockDiv = styled.div`
-  height: 60px;
-
-  @media screen and (max-width: 885px) {
-    display: none;
-  }
 `;
 
 const ShowMoreBox = styled.div`
@@ -281,33 +121,77 @@ const ShowMoreButton = styled.div`
   font-size: 20px;
 `;
 
-
 const ShowMore = () => {
   return (
     <>
-    <Goto to="/all">
-    <ShowMoreBox>
-        <ShowMoreButton>All Posts</ShowMoreButton>
-      </ShowMoreBox>
-    </Goto>
+      <Goto to="/all">
+        <ShowMoreBox>
+          <ShowMoreButton>All Posts</ShowMoreButton>
+        </ShowMoreBox>
+      </Goto>
     </>
   );
 };
 
 export default function Home() {
+  const [post, setPost] = useState([]);
+  const [post02, setPost02] = useState([]);
+
+  useEffect(() => {
+    FetchTestAPI().then((data) => {
+      setPost(data.data.slice(0, 9));
+    });
+    FetchTestAPI02().then((data) => {
+      setPost02(data.data.slice(0, 9));
+    });
+  }, []);
+
   return (
     <>
       <MainAnnouncement />
-      <MainPost />
-      <LazyPost />
-      <BlockDiv />
-      <LazyPost />
+      <MainCoverPost
+        title="India squad for Cricket T20 World Cup 2021: All you need to know"
+        content="The suspense around the Indian squad for the upcoming Cricket T20
+          World Cup 2021, to be played in the United Arab Emirates from October
+          14 to November 17, was over on Wednesday night as the selectors
+          announced the list of players who will be making the trip to the T20"
+        name="Devarchit Varma"
+        time="Sep 09 | 5 mins"
+      />
+      <Box>
+        {post.length !== 0 &&
+          post.map((data) => {
+            return (
+              <MainPostContent
+                to={data.crawler_No}
+                key={data.crawler_No}
+                src={data.crawler_PicUrl}
+                title={data.crawler_Title.substring(0, 18)}
+                content={data.crawler_Content.substring(0, 70)}
+                name={data.crawler_Web}
+                time={data.crawler_Date}
+              />
+            );
+          })}
+      </Box>
       <MiddleAdvertise alt="advertiseGames" src={advertise} />
       <Latest>LATEST</Latest>
-      <MiddlePostText />
-      <LazyPost />
-      <BlockDiv />
-      <LazyPost />
+      <Box>
+        {post02.length !== 0 &&
+          post02.map((data) => {
+            return (
+              <MainPostContent
+                to={data.crawler_No}
+                key={data.crawler_No}
+                src={data.crawler_PicUrl}
+                title={data.crawler_Title.substring(0, 10)}
+                content={data.crawler_Content.substring(0, 70)}
+                name={data.crawler_Web}
+                time={data.crawler_Date}
+              />
+            );
+          })}
+      </Box>
       <ShowMore />
     </>
   );
