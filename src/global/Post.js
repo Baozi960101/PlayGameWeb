@@ -136,6 +136,7 @@ const MainPostBox = styled.div`
 
 const MainCoverPostImgBox = styled.div`
   max-width: 60%;
+  height: 360px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -161,7 +162,7 @@ const MainCoverImgBox = styled.div`
 `;
 
 const MainCoverPostImg = styled.img`
-  height: 100%;
+  width: 100%;
 `;
 
 export const MainCoverPost = ({ to, src, title, content, name, time }) => {
@@ -170,9 +171,7 @@ export const MainCoverPost = ({ to, src, title, content, name, time }) => {
       <MainPostBox>
         <MainCoverPostImgBox>
           <GoTo to={`/${to}`}>
-            <MainCoverImgBox>
-              <MainCoverPostImg alt="Games" src={src} />
-            </MainCoverImgBox>
+            <MainCoverPostImg alt="Games" src={src} />
           </GoTo>
         </MainCoverPostImgBox>
         <MainPostTextBox>

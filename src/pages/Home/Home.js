@@ -5,7 +5,9 @@ import { Slideshow } from "./Slideshow";
 import advertise from "../../images/advertise.webp";
 import { Link } from "react-router-dom";
 import { MainPostContent, MainCoverPost } from "../../global/Post";
-import { FetchTestAPI, FetchTestAPI02 } from "../../global/API";
+import { FetchTestAPI, FetchTestAPI02, testFetchAPI } from "../../global/API";
+import { LoadingBox } from "../../global/Loading";
+import useHandleArticle from "../../global/useHandleArticle";
 
 const Goto = styled(Link)`
   text-decoration: none;
@@ -87,7 +89,7 @@ const MiddleAdvertise = styled.img`
 `;
 
 const Latest = styled.div`
-  margin: 0 auto 10px auto;
+  margin: 50px auto 10px auto;
   max-width: 1230px;
   padding: 0px 15px 20px 15px;
   box-sizing: border-box;
@@ -138,18 +140,48 @@ export default function Home() {
   const [post, setPost] = useState([]);
   const [post02, setPost02] = useState([]);
 
+  const { confirmSource, load, setLoad, gameInformationSource, sportsSource } =
+    useHandleArticle();
+
+  // useEffect(() => {
+  //   FetchTestAPI().then((data) => {
+  //     setCoverPost(data.data.slice(0, 1));
+  //     setPost(data.data.slice(0, 9));
+  //   });
+  //   FetchTestAPI02().then((data) => {
+  //     setPost02(data.data.slice(0, 9));
+  //   });
+  // }, []);
+
+  //以上是新增API
   useEffect(() => {
-    FetchTestAPI().then((data) => {
+    // setLoad(true);
+    confirmSource();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  console.log(gameInformationSource);
+  useEffect(() => {
+    if (gameInformationSource.length === 0 && sportsSource.length === 0) {
+      return;
+    }
+    console.log("發API了");
+    //這裡失敗
+    testFetchAPI(gameInformationSource).then((data) => {
       setCoverPost(data.data.slice(0, 1));
       setPost(data.data.slice(0, 9));
+      setLoad(false);
     });
-    FetchTestAPI02().then((data) => {
+    testFetchAPI(sportsSource).then((data) => {
       setPost02(data.data.slice(0, 9));
+      setLoad(false);
     });
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [gameInformationSource, sportsSource]);
 
   return (
     <>
+      {load && <LoadingBox />}
       <MainAnnouncement />
       {coverPost.map((data) => {
         return (
@@ -158,7 +190,7 @@ export default function Home() {
             key={data.crawler_No}
             src={data.crawler_PicUrl}
             title={data.crawler_Title.substring(0, 18)}
-            content={data.crawler_Content.substring(0, 70)}
+            content={data.crawler_Content.substring(0, 250)}
             name={data.crawler_Web}
             time={data.crawler_Date}
           />
@@ -180,8 +212,8 @@ export default function Home() {
             );
           })}
       </Box>
-      <MiddleAdvertise alt="advertiseGames" src={advertise} />
-      <Latest>Game Information</Latest>
+      {/* <MiddleAdvertise alt="advertiseGames" src={advertise} /> */}
+      <Latest>Sports</Latest>
       <Box>
         {post02.length !== 0 &&
           post02.map((data) => {

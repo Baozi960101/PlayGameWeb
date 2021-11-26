@@ -2,8 +2,9 @@ import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import advertise from "../../images/advertise.webp";
 import { MainPostContent } from "../../global/Post";
-import { FetchTestAPI, AloneApi } from "../../global/API";
+import { FetchTestAPI, AloneApi, testFetchAPI } from "../../global/API";
 import { SlugContext } from "../../global/context";
+import useHandleArticle from "../../global/useHandleArticle";
 
 const MainBox = styled.div`
   display: flex;
@@ -96,6 +97,8 @@ export default function SingleArticle() {
   const [singlePost, setSinglePost] = useState([]);
   const [post, setPost] = useState([]);
 
+  const { gameInformationSource } = useHandleArticle();
+
   useEffect(() => {
     if (aloneSlug !== "") {
       fetch(AloneApi(aloneSlug))
@@ -108,10 +111,10 @@ export default function SingleArticle() {
   }, [aloneSlug]);
 
   useEffect(() => {
-    FetchTestAPI().then((data) => {
+    testFetchAPI(gameInformationSource).then((data) => {
       setPost(data.data.slice(0, 3));
     });
-  }, []);
+  }, [gameInformationSource]);
 
   return (
     <>
@@ -126,7 +129,7 @@ export default function SingleArticle() {
             />
           );
         })}
-      <MiddleAdvertise src={advertise} />
+      {/* <MiddleAdvertise src={advertise} /> */}
       <MoreLikeThis>More Like This</MoreLikeThis>
       <Box>
         {post.length !== 0 &&

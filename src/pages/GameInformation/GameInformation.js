@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { MainCoverPost, MainPostContent } from "../../global/Post";
-import { TestURL } from "../../global/API";
+import { TestURL, fetchAPIName } from "../../global/API";
 import { ChangePageButton } from "../../global/ChangePage";
 import useHandleArticle from "../../global/useHandleArticle";
 import { ScrollToTop } from "../../global/Scroll";
+import { LoadingBox } from "../../global/Loading";
 
 const MainTitle = styled.div`
   margin: 0 auto 50px auto;
@@ -28,8 +29,15 @@ const Box = styled.div`
 `;
 
 export default function GameInformation() {
-  const { FetchDate, post, page, ChangeNextPage, ChangePrevPage } =
-    useHandleArticle();
+  const {
+    FetchDate,
+    post,
+    page,
+    ChangeNextPage,
+    ChangePrevPage,
+    load,
+    allSource,
+  } = useHandleArticle();
 
   useEffect(() => {
     ScrollToTop();
@@ -37,8 +45,16 @@ export default function GameInformation() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  //以下是新增內容
+  useEffect(() => {
+    ScrollToTop();
+    FetchDate(fetchAPIName("GameInformation", allSource.join()));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <>
+      {load && <LoadingBox />}
       <MainTitle>Game Information</MainTitle>
       <MainCoverPost
         title="India squad for Cricket T20 World Cup 2021: All you need to know"

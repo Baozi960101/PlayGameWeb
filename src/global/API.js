@@ -2,6 +2,8 @@ const MainURL = "https://argus.work/argus/api/v1";
 const Login_Api = `https://argus.work/argus/api/v1/auth/login`;
 const GetUserData_Api = `https://argus.work/argus/api/v1/auth/user-profile`;
 
+const MainApi = "https://api.hinduhope.com/api/v1/data";
+
 function getDay(day) {
   let today = new Date();
   let targetday_milliseconds = today.getTime() + 1000 * 60 * 60 * 24 * day;
@@ -39,8 +41,18 @@ export function FetchTestAPI02() {
 }
 
 export const AloneApi = (id) => {
-  return `${MainURL}/data/${id}`;
+  return `${MainApi}/${id}`;
 };
+
+export function testFetchAPI(source) {
+  return fetch(
+    `${MainApi}?start_date=${LastNowDate}&end_date=${nowDate}&crawler_Web=${source}`
+  ).then((res) => res.json());
+}
+
+export function fetchAPIName(source) {
+  return `${MainApi}?start_date=${LastNowDate}&end_date=${nowDate}&crawler_Web=${source}`;
+}
 
 export function LoginApi(account, password) {
   let data = new FormData();
