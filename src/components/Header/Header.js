@@ -1,8 +1,8 @@
 import { useState } from "react";
 import styled from "styled-components";
-import logo from "../../images/logo.png";
 import menu from "../../images/menu.svg";
 import { Link } from "react-router-dom";
+import playGamesLongLogo from "../../images/playGamesLongLogo.svg";
 
 const HeaderBox = styled.div`
   display: flex;
@@ -72,7 +72,9 @@ const SubTitleRWD = styled.div`
   ${(props) => props.$move && `height:46px`}
 `;
 
-const Goto = styled(Link)``;
+const Goto = styled(Link)`
+  text-decoration: none;
+`;
 
 const LogoImg = styled.img`
   cursor: pointer;
@@ -86,8 +88,9 @@ const LogoImg = styled.img`
 `;
 
 const SubTitleBox = styled.div`
+  width: 50%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
 
   @media screen and (max-width: 885px) {
     display: none;
@@ -96,7 +99,8 @@ const SubTitleBox = styled.div`
 
 const SubTitle = styled.div`
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 600;
+  color: black;
   cursor: pointer;
 
   & + & {
@@ -124,31 +128,29 @@ export default function Header() {
         <HeaderRWD>
           <Menu onClick={optionChange} src={menu} />
           <Goto to="./">
-            <LogoImg alt="PlayGames" src={logo} />
+            <LogoImg alt="PlayGames" src={playGamesLongLogo} />
           </Goto>
         </HeaderRWD>
         <SubTitleBox>
-          <SubTitle>Top Games</SubTitle>
-          <SubTitle>News</SubTitle>
-          <SubTitle>Esports</SubTitle>
-          <SubTitle>Fantasy</SubTitle>
-          <SubTitle>Rummy</SubTitle>
-          <SubTitle>Sports News</SubTitle>
-          <SubTitle>Culture</SubTitle>
-          <SubTitle>FAQs</SubTitle>
-          <SubTitle>Support</SubTitle>
+          <Goto to="/gameinformation">
+            <SubTitle>Game Information</SubTitle>
+          </Goto>
+          <Goto to="/gamingstrategy">
+            <SubTitle>Gaming Strategy</SubTitle>
+          </Goto>
+          <Goto to="/vehicles">
+            <SubTitle>Vehicles</SubTitle>
+          </Goto>
+          <Goto to="/sports">
+            <SubTitle>Sports</SubTitle>
+          </Goto>
         </SubTitleBox>
       </HeaderBox>
       <HeaderRWDOption $move={showOption}>
-        <SubTitleRWD $move={showOption}>Top Games</SubTitleRWD>
-        <SubTitleRWD $move={showOption}>News</SubTitleRWD>
-        <SubTitleRWD $move={showOption}>Esports</SubTitleRWD>
-        <SubTitleRWD $move={showOption}>Fantasy</SubTitleRWD>
-        <SubTitleRWD $move={showOption}>Rummy</SubTitleRWD>
-        <SubTitleRWD $move={showOption}>Sports News</SubTitleRWD>
-        <SubTitleRWD $move={showOption}>Culture</SubTitleRWD>
-        <SubTitleRWD $move={showOption}>FAQs</SubTitleRWD>
-        <SubTitleRWD $move={showOption}>Support</SubTitleRWD>
+        <SubTitleRWD $move={showOption}>Game Information</SubTitleRWD>
+        <SubTitleRWD $move={showOption}>Gaming Strategy</SubTitleRWD>
+        <SubTitleRWD $move={showOption}>Vehicles</SubTitleRWD>
+        <SubTitleRWD $move={showOption}>Sports</SubTitleRWD>
       </HeaderRWDOption>
     </>
   );

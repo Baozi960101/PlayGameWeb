@@ -129,6 +129,7 @@ const MainPostBox = styled.div`
   box-sizing: border-box;
 
   @media screen and (max-width: 885px) {
+    width: 100%;
     margin-bottom: 40px;
   }
 `;
@@ -146,19 +147,38 @@ const MainCoverPostImgBox = styled.div`
   }
 `;
 
-const MainCoverPostImg = styled.img`
-  width: 100%;
+const MainCoverImgBox = styled.div`
+  width: 720px;
+  height: 360px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: red;
+
+  @media screen and (max-width: 885px) {
+    width: 100%;
+  }
 `;
 
-export const MainCoverPost = ({ src, title, content, name, time }) => {
+const MainCoverPostImg = styled.img`
+  height: 100%;
+`;
+
+export const MainCoverPost = ({ to, src, title, content, name, time }) => {
   return (
     <>
       <MainPostBox>
         <MainCoverPostImgBox>
-          <MainCoverPostImg alt="Games" src={singleArticleTest} />
+          <GoTo to={`/${to}`}>
+            <MainCoverImgBox>
+              <MainCoverPostImg alt="Games" src={src} />
+            </MainCoverImgBox>
+          </GoTo>
         </MainCoverPostImgBox>
         <MainPostTextBox>
-          <MainPostTitle>{title}</MainPostTitle>
+          <GoTo to={`/${to}`}>
+            <MainPostTitle>{title}</MainPostTitle>
+          </GoTo>
           <SubTitle>{content}</SubTitle>
           <MarkBox>
             <Img src={star} />

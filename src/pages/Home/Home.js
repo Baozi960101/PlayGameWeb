@@ -124,7 +124,7 @@ const ShowMoreButton = styled.div`
 const ShowMore = () => {
   return (
     <>
-      <Goto to="/all">
+      <Goto to="/gameinformation">
         <ShowMoreBox>
           <ShowMoreButton>All Posts</ShowMoreButton>
         </ShowMoreBox>
@@ -134,11 +134,13 @@ const ShowMore = () => {
 };
 
 export default function Home() {
+  const [coverPost, setCoverPost] = useState([]);
   const [post, setPost] = useState([]);
   const [post02, setPost02] = useState([]);
 
   useEffect(() => {
     FetchTestAPI().then((data) => {
+      setCoverPost(data.data.slice(0, 1));
       setPost(data.data.slice(0, 9));
     });
     FetchTestAPI02().then((data) => {
@@ -149,15 +151,19 @@ export default function Home() {
   return (
     <>
       <MainAnnouncement />
-      <MainCoverPost
-        title="India squad for Cricket T20 World Cup 2021: All you need to know"
-        content="The suspense around the Indian squad for the upcoming Cricket T20
-          World Cup 2021, to be played in the United Arab Emirates from October
-          14 to November 17, was over on Wednesday night as the selectors
-          announced the list of players who will be making the trip to the T20"
-        name="Devarchit Varma"
-        time="Sep 09 | 5 mins"
-      />
+      {coverPost.map((data) => {
+        return (
+          <MainCoverPost
+            to={data.crawler_No}
+            key={data.crawler_No}
+            src={data.crawler_PicUrl}
+            title={data.crawler_Title.substring(0, 18)}
+            content={data.crawler_Content.substring(0, 70)}
+            name={data.crawler_Web}
+            time={data.crawler_Date}
+          />
+        );
+      })}
       <Box>
         {post.length !== 0 &&
           post.map((data) => {
@@ -175,7 +181,7 @@ export default function Home() {
           })}
       </Box>
       <MiddleAdvertise alt="advertiseGames" src={advertise} />
-      <Latest>LATEST</Latest>
+      <Latest>Game Information</Latest>
       <Box>
         {post02.length !== 0 &&
           post02.map((data) => {

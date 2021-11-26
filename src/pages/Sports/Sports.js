@@ -27,7 +27,7 @@ const Box = styled.div`
   box-sizing: border-box;
 `;
 
-export default function AllPost() {
+export default function Sports() {
   const { FetchDate, post, page, ChangeNextPage, ChangePrevPage } =
     useHandleArticle();
 
@@ -39,7 +39,7 @@ export default function AllPost() {
 
   return (
     <>
-      <MainTitle>All</MainTitle>
+      <MainTitle>Sports</MainTitle>
       <MainCoverPost
         title="India squad for Cricket T20 World Cup 2021: All you need to know"
         content="The suspense around the Indian squad for the upcoming Cricket T20
