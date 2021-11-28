@@ -9,7 +9,6 @@ import {
 import Header from "../Header";
 import Footer from "../Footer/Footer";
 import Home from "../../pages/Home/Home";
-import AllPost from "../../pages/AllPost/AllPost";
 import GameInformation from "../../pages/GameInformation";
 import SingleArticle from "../../pages/SingleArticle/SingleArticle";
 import { SlugContext } from "../../global/context";
@@ -29,7 +28,6 @@ const NecessaryComponent = ({ content }) => {
 
 export default function App() {
   const [aloneSlug, setAloneSlug] = useState("");
-  //登入狀態   之後改為false
 
   function BlogSinglePost() {
     let { slug } = useParams();
@@ -48,9 +46,6 @@ export default function App() {
           <Switch>
             <Route exact path="/">
               <NecessaryComponent content={<Home />} />
-            </Route>
-            <Route exact path="/all">
-              <NecessaryComponent content={<AllPost />} />
             </Route>
             <Route exact path="/gameinformation">
               <NecessaryComponent content={<GameInformation />} />

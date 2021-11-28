@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import trending from "../../images/trending.png";
 import { Slideshow } from "./Slideshow";
-import advertise from "../../images/advertise.webp";
 import { Link } from "react-router-dom";
 import { MainPostContent, MainCoverPost } from "../../global/Post";
-import { FetchTestAPI, FetchTestAPI02, testFetchAPI } from "../../global/API";
 import { LoadingBox } from "../../global/Loading";
 import useHandleArticle from "../../global/useHandleArticle";
 
@@ -82,11 +80,11 @@ const Box = styled.div`
   box-sizing: border-box;
 `;
 
-const MiddleAdvertise = styled.img`
-  width: 100%;
-  margin: 100px 0 80px 0;
-  cursor: pointer;
-`;
+// const MiddleAdvertise = styled.img`
+//   width: 100%;
+//   margin: 100px 0 80px 0;
+//   cursor: pointer;
+// `;
 
 const Latest = styled.div`
   margin: 50px auto 10px auto;
@@ -126,7 +124,7 @@ const ShowMoreButton = styled.div`
 const ShowMore = () => {
   return (
     <>
-      <Goto to="/gameinformation">
+      <Goto to="/sports">
         <ShowMoreBox>
           <ShowMoreButton>All Posts</ShowMoreButton>
         </ShowMoreBox>
@@ -136,48 +134,18 @@ const ShowMore = () => {
 };
 
 export default function Home() {
-  const [coverPost, setCoverPost] = useState([]);
-  const [post, setPost] = useState([]);
-  const [post02, setPost02] = useState([]);
+  const {
+    load,
+    homePageArticle,
+    coverPost,
+    honePageTopPost,
+    honePageBottomPost,
+  } = useHandleArticle();
 
-  const { confirmSource, load, setLoad, gameInformationSource, sportsSource } =
-    useHandleArticle();
-
-  // useEffect(() => {
-  //   FetchTestAPI().then((data) => {
-  //     setCoverPost(data.data.slice(0, 1));
-  //     setPost(data.data.slice(0, 9));
-  //   });
-  //   FetchTestAPI02().then((data) => {
-  //     setPost02(data.data.slice(0, 9));
-  //   });
-  // }, []);
-
-  //以上是新增API
   useEffect(() => {
-    // setLoad(true);
-    confirmSource();
+    homePageArticle();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  console.log(gameInformationSource);
-  useEffect(() => {
-    if (gameInformationSource.length === 0 && sportsSource.length === 0) {
-      return;
-    }
-    console.log("發API了");
-    //這裡失敗
-    testFetchAPI(gameInformationSource).then((data) => {
-      setCoverPost(data.data.slice(0, 1));
-      setPost(data.data.slice(0, 9));
-      setLoad(false);
-    });
-    testFetchAPI(sportsSource).then((data) => {
-      setPost02(data.data.slice(0, 9));
-      setLoad(false);
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [gameInformationSource, sportsSource]);
 
   return (
     <>
@@ -197,8 +165,8 @@ export default function Home() {
         );
       })}
       <Box>
-        {post.length !== 0 &&
-          post.map((data) => {
+        {honePageTopPost.length !== 0 &&
+          honePageTopPost.map((data) => {
             return (
               <MainPostContent
                 to={data.crawler_No}
@@ -215,8 +183,8 @@ export default function Home() {
       {/* <MiddleAdvertise alt="advertiseGames" src={advertise} /> */}
       <Latest>Sports</Latest>
       <Box>
-        {post02.length !== 0 &&
-          post02.map((data) => {
+        {honePageBottomPost.length !== 0 &&
+          honePageBottomPost.map((data) => {
             return (
               <MainPostContent
                 to={data.crawler_No}

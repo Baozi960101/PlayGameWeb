@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
-import advertise from "../../images/advertise.webp";
 import { MainPostContent } from "../../global/Post";
-import { FetchTestAPI, AloneApi, testFetchAPI } from "../../global/API";
+import { AloneApi } from "../../global/API";
 import { SlugContext } from "../../global/context";
 import useHandleArticle from "../../global/useHandleArticle";
+import { LoadingBox } from "../../global/Loading";
 
 const MainBox = styled.div`
   display: flex;
@@ -53,11 +53,11 @@ const ArticleContent = styled.div`
   }
 `;
 
-const MiddleAdvertise = styled.img`
-  width: 100%;
-  margin: 100px 0 80px 0;
-  cursor: pointer;
-`;
+// const MiddleAdvertise = styled.img`
+//   width: 100%;
+//   margin: 100px 0 80px 0;
+//   cursor: pointer;
+// `;
 
 const MoreLikeThis = styled.div`
   margin: 0 auto 50px auto;
@@ -95,9 +95,8 @@ const MainSinglePost = ({ src, title, content }) => {
 export default function SingleArticle() {
   const { aloneSlug } = useContext(SlugContext);
   const [singlePost, setSinglePost] = useState([]);
-  const [post, setPost] = useState([]);
 
-  const { gameInformationSource } = useHandleArticle();
+  const { MoreLikeThisArticle, post, load } = useHandleArticle();
 
   useEffect(() => {
     if (aloneSlug !== "") {
@@ -111,13 +110,13 @@ export default function SingleArticle() {
   }, [aloneSlug]);
 
   useEffect(() => {
-    testFetchAPI(gameInformationSource).then((data) => {
-      setPost(data.data.slice(0, 3));
-    });
-  }, [gameInformationSource]);
+    MoreLikeThisArticle();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
+      {load && <LoadingBox />}
       {singlePost.length !== 0 &&
         singlePost.map((data) => {
           return (

@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { MainCoverPost, MainPostContent } from "../../global/Post";
-import { TestURL } from "../../global/API";
 import { ChangePageButton } from "../../global/ChangePage";
 import useHandleArticle from "../../global/useHandleArticle";
 import { ScrollToTop } from "../../global/Scroll";
+import { LoadingBox } from "../../global/Loading";
 
 const MainTitle = styled.div`
   margin: 0 auto 50px auto;
@@ -28,27 +28,40 @@ const Box = styled.div`
 `;
 
 export default function GamingStrategy() {
-  const { FetchDate, post, page, ChangeNextPage, ChangePrevPage } =
-    useHandleArticle();
+  const {
+    post,
+    page,
+    ChangeNextPage,
+    ChangePrevPage,
+    load,
+    gameInformationPageArticle,
+    coverPost,
+  } = useHandleArticle();
 
+  //以下是新增內容
   useEffect(() => {
     ScrollToTop();
-    FetchDate(TestURL);
+    gameInformationPageArticle();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
+      {load && <LoadingBox />}
       <MainTitle>Gaming Strategy</MainTitle>
-      <MainCoverPost
-        title="India squad for Cricket T20 World Cup 2021: All you need to know"
-        content="The suspense around the Indian squad for the upcoming Cricket T20
-          World Cup 2021, to be played in the United Arab Emirates from October
-          14 to November 17, was over on Wednesday night as the selectors
-          announced the list of players who will be making the trip to the T20"
-        name="Devarchit Varma"
-        time="Sep 09 | 5 mins"
-      />
+      {coverPost.map((data) => {
+        return (
+          <MainCoverPost
+            to={data.crawler_No}
+            key={data.crawler_No}
+            src={data.crawler_PicUrl}
+            title={data.crawler_Title.substring(0, 18)}
+            content={data.crawler_Content.substring(0, 250)}
+            name={data.crawler_Web}
+            time={data.crawler_Date}
+          />
+        );
+      })}
       <Box>
         {post.length !== 0 &&
           post.map((data) => {

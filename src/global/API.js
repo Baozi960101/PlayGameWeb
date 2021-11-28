@@ -1,4 +1,3 @@
-const MainURL = "https://argus.work/argus/api/v1";
 const Login_Api = `https://argus.work/argus/api/v1/auth/login`;
 const GetUserData_Api = `https://argus.work/argus/api/v1/auth/user-profile`;
 
@@ -27,18 +26,6 @@ function doHandleMonth(month) {
 
 let nowDate = getDay(0);
 let LastNowDate = getDay(-7);
-
-export const TestURL = `${MainURL}/data?key=高雄市&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=all`;
-
-export const TestURL02 = `${MainURL}/data?key=台北市&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=chinatimes`;
-
-export function FetchTestAPI() {
-  return fetch(TestURL).then((res) => res.json());
-}
-
-export function FetchTestAPI02() {
-  return fetch(TestURL02).then((res) => res.json());
-}
 
 export const AloneApi = (id) => {
   return `${MainApi}/${id}`;
