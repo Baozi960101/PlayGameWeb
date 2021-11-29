@@ -107,7 +107,7 @@ export default function useHandleArticle() {
 
   async function ChangePrevPage() {
     if (page === 1) {
-      alert("目前在第一頁囉");
+      alert("The first page");
       return;
     }
     setLoad(true);
@@ -124,7 +124,7 @@ export default function useHandleArticle() {
 
   async function ChangeNextPage() {
     if (page === nowLastPage) {
-      alert("最後一頁囉");
+      alert("The Last page");
       return;
     }
     setLoad(true);

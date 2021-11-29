@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import star from "../images/star.png";
-import singleArticleTest from "../images/singleArticleTest.jpg";
 import { Link } from "react-router-dom";
 
 const PostBox = styled.div`
@@ -148,18 +147,18 @@ const MainCoverPostImgBox = styled.div`
   }
 `;
 
-const MainCoverImgBox = styled.div`
-  width: 720px;
-  height: 360px;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background-color: red;
+// const MainCoverImgBox = styled.div`
+//   width: 720px;
+//   height: 360px;
+//   align-items: center;
+//   justify-content: center;
+//   overflow: hidden;
+//   background-color: red;
 
-  @media screen and (max-width: 885px) {
-    width: 100%;
-  }
-`;
+//   @media screen and (max-width: 885px) {
+//     width: 100%;
+//   }
+// `;
 
 const MainCoverPostImg = styled.img`
   width: 100%;
