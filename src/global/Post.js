@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import star from "../images/star.png";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
+import pg180 from "../images/pg180.jpeg";
+import pg192 from "../images/pg192.jpeg";
+import playGamesLongLogo from "../images/playGamesLongLogo.svg";
 
 const PostBox = styled.div`
   width: 32%;
@@ -85,9 +89,56 @@ const GoTo = styled(Link)`
   text-decoration: none;
 `;
 
+const SEO = ({ title, src }) => (
+  <Helmet>
+    <meta charset="utf-8" />
+    <title> PlayGames | {title} </title>
+    <link rel="canonical" href="https://playgames.ai" />
+    <meta property="og:url" itemprop="url" content="https://playgames.ai" />
+    <meta
+      property="og:title"
+      itemprop="name"
+      content={`PlayGames | ${title}`}
+    />
+    <meta
+      property="og:image"
+      itemprop="image"
+      content={src !== "" ? src : playGamesLongLogo}
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:type" content="website" />
+    <meta
+      name="description"
+      content="Welcome to Play Games! This website shares information about the famous games, including online games, cards games, latest sport news and vehicles in India."
+    />
+    <meta
+      property="og:description"
+      itemprop="description"
+      content="Welcome to Play Games! This website shares information about the famous games, including online games, cards games, latest sport news and vehicles in India."
+    />
+    <meta name="viewport" content="width=1280" />
+    <meta name="robots" content="index,follow,noarchive" />
+    <link rel="apple-touch-icon" sizes="180x180" href={pg180} />
+    <link rel="shortcut icon" sizes="192x192" href={pg192} />
+    <meta property="og:locale" content="en-IN" />
+    <meta property="fb:app_id" content="703025527750832" />
+    <meta
+      property="og:site_name"
+      name="application-name"
+      content="playgamesai"
+    />
+    <meta
+      property="article:publisher"
+      content="https://www.facebook.com/playgamesai"
+    />
+  </Helmet>
+);
+
 export const MainPostContent = ({ to, src, title, content, name, time }) => {
   return (
     <>
+      <SEO title={title} src={src} />
       <PostBox>
         <GoTo to={`/${to}`}>
           <MainPostImg src={src} />
@@ -167,6 +218,7 @@ const MainCoverPostImg = styled.img`
 export const MainCoverPost = ({ to, src, title, content, name, time }) => {
   return (
     <>
+      <SEO title={title} src={src} />
       <MainPostBox>
         <MainCoverPostImgBox>
           <GoTo to={`/${to}`}>
