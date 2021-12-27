@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ScrollToTop } from "./Scroll";
-import { fetchAPIName } from "./API";
+import { TodayBaseballApi, TodayBasketballApi } from "./API";
 
 //此包含引入所有文章以及換頁功能
 export default function useHandleArticle() {
@@ -34,72 +34,19 @@ export default function useHandleArticle() {
 
   async function homePageArticle() {
     setLoad(true);
-    const res = await fetch(
-      `https://api.hinduhope.com/api/v1/data/showWeb?groups_Type=playgames`
-    );
-    const { data } = await res.json();
-    const GameInformation = data.GameInformation.map((item) => {
-      return item.source_Name;
-    });
-    const Sports = data.Sports.map((item) => {
-      return item.source_Name;
-    });
-    const homeRes = await fetch(fetchAPIName(GameInformation.join()));
+    const homeRes = await fetch(TodayBaseballApi);
     const homedata01 = await homeRes.json();
     setCoverPost(homedata01.data.slice(0, 1));
     setHomePageTopPost(homedata01.data.slice(0, 9));
-    const homeRes02 = await fetch(fetchAPIName(Sports.join()));
+    const homeRes02 = await fetch(TodayBasketballApi);
     const homedata02 = await homeRes02.json();
     setHomePageBottomPost(homedata02.data.slice(0, 9));
     setLoad(false);
   }
 
-  async function gameInformationPageArticle() {
-    setLoad(true);
-    const res = await fetch(
-      `https://api.hinduhope.com/api/v1/data/showWeb?groups_Type=playgames`
-    );
-    const { data } = await res.json();
-    const GameInformation = data.GameInformation.map((item) => {
-      return item.source_Name;
-    });
-    FetchDate(fetchAPIName(GameInformation.join()));
-  }
-
-  async function sportsPageArticle() {
-    setLoad(true);
-    const res = await fetch(
-      `https://api.hinduhope.com/api/v1/data/showWeb?groups_Type=playgames`
-    );
-    const { data } = await res.json();
-    const Sports = data.Sports.map((item) => {
-      return item.source_Name;
-    });
-    FetchDate(fetchAPIName(Sports.join()));
-  }
-
-  async function vehiclesPageArticle() {
-    setLoad(true);
-    const res = await fetch(
-      `https://api.hinduhope.com/api/v1/data/showWeb?groups_Type=playgames`
-    );
-    const { data } = await res.json();
-    const Vehicles = data.Vehicles.map((item) => {
-      return item.source_Name;
-    });
-    FetchDate(fetchAPIName(Vehicles.join()));
-  }
-
   async function MoreLikeThisArticle() {
     setLoad(true);
-    const res = await fetch(
-      `https://api.hinduhope.com/api/v1/data/showWeb?groups_Type=playgames`
-    );
-    const { data } = await res.json();
-    const GameInformation = data.GameInformation.map((item) => {
-      return item.source_Name;
-    });
-    const homeRes = await fetch(fetchAPIName(GameInformation.join()));
+    const homeRes = await fetch(TodayBaseballApi);
     const homedata01 = await homeRes.json();
     setPost(homedata01.data.slice(0, 3));
     setLoad(false);
@@ -107,7 +54,7 @@ export default function useHandleArticle() {
 
   async function ChangePrevPage() {
     if (page === 1) {
-      alert("The first page");
+      alert("目前在第一頁");
       return;
     }
     setLoad(true);
@@ -124,7 +71,7 @@ export default function useHandleArticle() {
 
   async function ChangeNextPage() {
     if (page === nowLastPage) {
-      alert("The Last page");
+      alert("目前在最後頁");
       return;
     }
     setLoad(true);
@@ -159,9 +106,6 @@ export default function useHandleArticle() {
     coverPost,
     honePageTopPost,
     honePageBottomPost,
-    gameInformationPageArticle,
     MoreLikeThisArticle,
-    sportsPageArticle,
-    vehiclesPageArticle,
   };
 }

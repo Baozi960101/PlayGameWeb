@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { MainPostContent, MainCoverPost } from "../../global/Post";
 import { LoadingBox } from "../../global/Loading";
 import useHandleArticle from "../../global/useHandleArticle";
+import presetBasketball from "../../images/presetBasketball.jpg";
+import presetBaseball from "../../images/presetBaseball.jpg";
 
 const Goto = styled(Link)`
   text-decoration: none;
@@ -124,9 +126,9 @@ const ShowMoreButton = styled.div`
 const ShowMore = () => {
   return (
     <>
-      <Goto to="/sports">
+      <Goto to="/basketball">
         <ShowMoreBox>
-          <ShowMoreButton>All Posts</ShowMoreButton>
+          <ShowMoreButton>觀看更多</ShowMoreButton>
         </ShowMoreBox>
       </Goto>
     </>
@@ -150,7 +152,7 @@ export default function Home() {
   return (
     <>
       {load && <LoadingBox />}
-      <MainAnnouncement />
+      {/* <MainAnnouncement /> */}
       {coverPost.map((data) => {
         return (
           <MainCoverPost
@@ -158,6 +160,7 @@ export default function Home() {
             key={data.crawler_No}
             src={data.crawler_PicUrl}
             title={data.crawler_Title.substring(0, 18)}
+            preset={presetBasketball}
             content={data.crawler_Content.substring(0, 250)}
             name={data.crawler_Web}
             time={data.crawler_Date}
@@ -172,6 +175,7 @@ export default function Home() {
                 to={data.crawler_No}
                 key={data.crawler_No}
                 src={data.crawler_PicUrl}
+                preset={presetBasketball}
                 title={data.crawler_Title.substring(0, 18)}
                 content={data.crawler_Content.substring(0, 70)}
                 name={data.crawler_Web}
@@ -181,7 +185,7 @@ export default function Home() {
           })}
       </Box>
       {/* <MiddleAdvertise alt="advertiseGames" src={advertise} /> */}
-      <Latest>Sports</Latest>
+      <Latest>籃球</Latest>
       <Box>
         {honePageBottomPost.length !== 0 &&
           honePageBottomPost.map((data) => {
@@ -190,6 +194,7 @@ export default function Home() {
                 to={data.crawler_No}
                 key={data.crawler_No}
                 src={data.crawler_PicUrl}
+                preset={presetBaseball}
                 title={data.crawler_Title.substring(0, 10)}
                 content={data.crawler_Content.substring(0, 70)}
                 name={data.crawler_Web}

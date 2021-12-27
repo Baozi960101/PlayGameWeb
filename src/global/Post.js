@@ -135,13 +135,21 @@ const SEO = ({ title, src }) => (
   </Helmet>
 );
 
-export const MainPostContent = ({ to, src, title, content, name, time }) => {
+export const MainPostContent = ({
+  to,
+  src,
+  title,
+  content,
+  name,
+  time,
+  preset,
+}) => {
   return (
     <>
-      <SEO title={title} src={src} />
       <PostBox>
+        <SEO title={title} src={src === "" ? preset : src} />
         <GoTo to={`/${to}`}>
-          <MainPostImg src={src} />
+          <MainPostImg src={src === "" ? preset : src} />
         </GoTo>
         <GoTo to={`/${to}`}>
           <MainPostTitle>{title}</MainPostTitle>
@@ -215,14 +223,22 @@ const MainCoverPostImg = styled.img`
   width: 100%;
 `;
 
-export const MainCoverPost = ({ to, src, title, content, name, time }) => {
+export const MainCoverPost = ({
+  to,
+  src,
+  title,
+  content,
+  name,
+  time,
+  preset,
+}) => {
   return (
     <>
-      <SEO title={title} src={src} />
       <MainPostBox>
+        <SEO title={title} src={src} />
         <MainCoverPostImgBox>
           <GoTo to={`/${to}`}>
-            <MainCoverPostImg alt="Games" src={src} />
+            <MainCoverPostImg alt="Games" src={src === "" ? preset : src} />
           </GoTo>
         </MainCoverPostImgBox>
         <MainPostTextBox>

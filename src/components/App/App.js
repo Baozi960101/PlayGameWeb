@@ -9,12 +9,14 @@ import {
 import Header from "../Header";
 import Footer from "../Footer/Footer";
 import Home from "../../pages/Home/Home";
-import GameInformation from "../../pages/GameInformation";
+import Baseball from "../../pages/Baseball";
 import SingleArticle from "../../pages/SingleArticle/SingleArticle";
 import { SlugContext } from "../../global/context";
-import GamingStrategy from "../../pages/GamingStrategy/GamingStrategy";
-import Vehicles from "../../pages/Vehicles/Vehicles";
-import Sports from "../../pages/Sports/Sports";
+import Basketball from "../../pages/Basketball/Basketball";
+import Other from "../../pages/Other/Other";
+import Football from "../../pages/Football/Football";
+import Tennis from "../../pages/Tennis/Tennis";
+import Volleyball from "../../pages/Volleyball/Volleyball";
 
 const NecessaryComponent = ({ content }) => {
   return (
@@ -47,17 +49,23 @@ export default function App() {
             <Route exact path="/">
               <NecessaryComponent content={<Home />} />
             </Route>
-            <Route exact path="/gameinformation">
-              <NecessaryComponent content={<GameInformation />} />
+            <Route exact path="/baseball">
+              <NecessaryComponent content={<Baseball />} />
             </Route>
-            <Route exact path="/gamingstrategy">
-              <NecessaryComponent content={<GamingStrategy />} />
+            <Route exact path="/basketball">
+              <NecessaryComponent content={<Basketball />} />
             </Route>
-            <Route exact path="/vehicles">
-              <NecessaryComponent content={<Vehicles />} />
+            <Route exact path="/football">
+              <NecessaryComponent content={<Football />} />
             </Route>
-            <Route exact path="/sports">
-              <NecessaryComponent content={<Sports />} />
+            <Route exact path="/tennis">
+              <NecessaryComponent content={<Tennis />} />
+            </Route>
+            <Route exact path="/volleyball">
+              <NecessaryComponent content={<Volleyball />} />
+            </Route>
+            <Route exact path="/other">
+              <NecessaryComponent content={<Other />} />
             </Route>
             <Route exact path="/:slug">
               <NecessaryComponent content={<BlogSinglePost />} />

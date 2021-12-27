@@ -132,25 +132,33 @@ export default function Header() {
           </Goto>
         </HeaderRWD>
         <SubTitleBox>
-          <Goto to="/gameinformation">
-            <SubTitle>Game Information</SubTitle>
+          <Goto to="/baseball">
+            <SubTitle>棒球</SubTitle>
           </Goto>
-          <Goto to="/gamingstrategy">
-            <SubTitle>Gaming Strategy</SubTitle>
+          <Goto to="/basketball">
+            <SubTitle>籃球</SubTitle>
           </Goto>
-          <Goto to="/vehicles">
-            <SubTitle>Vehicles</SubTitle>
+          <Goto to="/football">
+            <SubTitle>足球</SubTitle>
           </Goto>
-          <Goto to="/sports">
-            <SubTitle>Sports</SubTitle>
+          <Goto to="/tennis">
+            <SubTitle>網球</SubTitle>
+          </Goto>
+          <Goto to="/volleyball">
+            <SubTitle>排球</SubTitle>
+          </Goto>
+          <Goto to="/other">
+            <SubTitle>其他</SubTitle>
           </Goto>
         </SubTitleBox>
       </HeaderBox>
       <HeaderRWDOption $move={showOption}>
-        <SubTitleRWD $move={showOption}>Game Information</SubTitleRWD>
-        <SubTitleRWD $move={showOption}>Gaming Strategy</SubTitleRWD>
-        <SubTitleRWD $move={showOption}>Vehicles</SubTitleRWD>
-        <SubTitleRWD $move={showOption}>Sports</SubTitleRWD>
+        <SubTitleRWD $move={showOption}>棒球</SubTitleRWD>
+        <SubTitleRWD $move={showOption}>籃球</SubTitleRWD>
+        <SubTitleRWD $move={showOption}>足球</SubTitleRWD>
+        <SubTitleRWD $move={showOption}>網球</SubTitleRWD>
+        <SubTitleRWD $move={showOption}>排球</SubTitleRWD>
+        <SubTitleRWD $move={showOption}>其他</SubTitleRWD>
       </HeaderRWDOption>
     </>
   );

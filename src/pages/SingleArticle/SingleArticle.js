@@ -5,6 +5,7 @@ import { AloneApi } from "../../global/API";
 import { SlugContext } from "../../global/context";
 import useHandleArticle from "../../global/useHandleArticle";
 import { LoadingBox } from "../../global/Loading";
+import presetBaseball from "../../images/presetBaseball.jpg";
 
 const MainBox = styled.div`
   display: flex;
@@ -87,7 +88,11 @@ const MainSinglePost = ({ src, title, content }) => {
         <ArticleCover src={src} />
       </ArticleCoverBox>
       <ArticleTitle>{title}</ArticleTitle>
-      <ArticleContent>{content}</ArticleContent>
+      <ArticleContent>
+        {/* `<h4><span style="font-size: 14px;"><strong>ewgewggewgew</strong></span></h4>
+      <h4>你好拉</h4>` */}
+        <div dangerouslySetInnerHTML={{ __html: content }}></div>
+      </ArticleContent>
     </MainBox>
   );
 };
@@ -129,7 +134,7 @@ export default function SingleArticle() {
           );
         })}
       {/* <MiddleAdvertise src={advertise} /> */}
-      <MoreLikeThis>More Like This</MoreLikeThis>
+      <MoreLikeThis>更多你會喜歡</MoreLikeThis>
       <Box>
         {post.length !== 0 &&
           post.map((data) => {
@@ -138,6 +143,7 @@ export default function SingleArticle() {
                 to={data.crawler_No}
                 key={data.crawler_No}
                 src={data.crawler_PicUrl}
+                preset={presetBaseball}
                 title={data.crawler_Title.substring(0, 10)}
                 content={data.crawler_Content.substring(0, 70)}
                 name={data.crawler_Web}
