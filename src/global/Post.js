@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import pg180 from "../images/pg180.jpeg";
 import pg192 from "../images/pg192.jpeg";
-import playGamesLongLogo from "../images/playGamesLongLogo.svg";
+import temporarilyLogo from "../images/temporarilyLogo.png";
 
 const PostBox = styled.div`
   width: 32%;
@@ -92,30 +92,30 @@ const GoTo = styled(Link)`
 const SEO = ({ title, src }) => (
   <Helmet>
     <meta charset="utf-8" />
-    <title> PlayGames | {title} </title>
-    <link rel="canonical" href="https://playgames.ai" />
-    <meta property="og:url" itemprop="url" content="https://playgames.ai" />
+    <title> Sport Fun | {title} </title>
+    <link rel="canonical" href="http://sportfun.tw/#/" />
+    <meta property="og:url" itemprop="url" content="http://sportfun.tw/#/" />
     <meta
       property="og:title"
       itemprop="name"
-      content={`PlayGames | ${title}`}
+      content={`Sport Fun | ${title}`}
     />
     <meta
       property="og:image"
       itemprop="image"
-      content={src !== "" ? src : playGamesLongLogo}
+      content={src !== "" ? src : temporarilyLogo}
     />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:type" content="website" />
     <meta
       name="description"
-      content="Welcome to Play Games! This website shares information about the famous games, including online games, cards games, latest sport news and vehicles in India."
+      content="Welcome to Sport Fun! This website shares information about the famous games, including online games, cards games, latest sport news and vehicles in India."
     />
     <meta
       property="og:description"
       itemprop="description"
-      content="Welcome to Play Games! This website shares information about the famous games, including online games, cards games, latest sport news and vehicles in India."
+      content="Welcome to Sport Fun! This website shares information about the famous games, including online games, cards games, latest sport news and vehicles in India."
     />
     <meta name="viewport" content="width=1280" />
     <meta name="robots" content="index,follow,noarchive" />
@@ -123,14 +123,10 @@ const SEO = ({ title, src }) => (
     <link rel="shortcut icon" sizes="192x192" href={pg192} />
     <meta property="og:locale" content="en-IN" />
     <meta property="fb:app_id" content="703025527750832" />
-    <meta
-      property="og:site_name"
-      name="application-name"
-      content="playgamesai"
-    />
+    <meta property="og:site_name" name="application-name" content="sportfun" />
     <meta
       property="article:publisher"
-      content="https://www.facebook.com/playgamesai"
+      content="https://www.facebook.com/sportfun"
     />
   </Helmet>
 );
@@ -238,7 +234,7 @@ export const MainCoverPost = ({
         <SEO title={title} src={src} />
         <MainCoverPostImgBox>
           <GoTo to={`/${to}`}>
-            <MainCoverPostImg alt="Games" src={src === "" ? preset : src} />
+            <MainCoverPostImg alt="sportFun" src={src === "" ? preset : src} />
           </GoTo>
         </MainCoverPostImgBox>
         <MainPostTextBox>

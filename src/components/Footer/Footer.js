@@ -3,9 +3,7 @@ import facebook from "../../images/facebook.png";
 import instagram from "../../images/instagram.png";
 import twitter from "../../images/twitter.png";
 import youtube from "../../images/youtube.png";
-// import footerIcon from "../../images/footerIcon.webp";
-// import footerIcon2 from "../../images/footerIcon2.webp";
-import playGamesLongLogo from "../../images/playGamesLongLogo.svg";
+import temporarilyLogo from "../../images/temporarilyLogo.png";
 
 const FooterBox = styled.div`
   width: 100%;
@@ -34,8 +32,8 @@ const FooterContent = styled.div`
 `;
 
 const FooterLogoImg = styled.img`
-  width: 141px;
-  height: 61px;
+  width: 110px;
+  height: 50px;
 `;
 
 // const FooterMiddleBox = styled.div`
@@ -176,7 +174,7 @@ export default function Footer() {
       <FooterBox>
         <FooterContent>
           <FooterRWD>
-            <FooterLogoImg src={playGamesLongLogo} />
+            <FooterLogoImg src={temporarilyLogo} />
           </FooterRWD>
           <FooterRWD>
             <IconBox />

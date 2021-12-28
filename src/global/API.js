@@ -1,7 +1,6 @@
 const Login_Api = `https://argus.work/argus/api/v1/auth/login`;
 const GetUserData_Api = `https://argus.work/argus/api/v1/auth/user-profile`;
 
-const MainApi = "https://api.hinduhope.com/api/v1/data";
 const Source_API = `https://argus.work/argus/api/v1/data`;
 
 export const playgames =

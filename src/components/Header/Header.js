@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import menu from "../../images/menu.svg";
 import { Link } from "react-router-dom";
-import playGamesLongLogo from "../../images/playGamesLongLogo.svg";
+import temporarilyLogo from "../../images/temporarilyLogo.png";
 
 const HeaderBox = styled.div`
   display: flex;
@@ -79,12 +79,12 @@ const Goto = styled(Link)`
 const LogoImg = styled.img`
   cursor: pointer;
   max-width: 150px;
-  height: 64px;
+  height: 50px;
 
-  @media screen and (max-width: 885px) {
+  /* @media screen and (max-width: 885px) {
     max-width: 150px;
     height: 50px;
-  }
+  } */
 `;
 
 const SubTitleBox = styled.div`
@@ -128,7 +128,7 @@ export default function Header() {
         <HeaderRWD>
           <Menu onClick={optionChange} src={menu} />
           <Goto to="./">
-            <LogoImg alt="PlayGames" src={playGamesLongLogo} />
+            <LogoImg alt="sports" src={temporarilyLogo} />
           </Goto>
         </HeaderRWD>
         <SubTitleBox>
