@@ -5,7 +5,7 @@ import { ChangePageButton } from "../../global/ChangePage";
 import useHandleArticle from "../../global/useHandleArticle";
 import { ScrollToTop } from "../../global/Scroll";
 import { LoadingBox } from "../../global/Loading";
-import { TodayOtherApi } from "../../global/API";
+import { OtherApi } from "../../global/API";
 import presetSports from "../../images/presetSports.jpg";
 
 const MainTitle = styled.div`
@@ -43,7 +43,7 @@ export default function Other() {
   //以下是新增內容
   useEffect(() => {
     ScrollToTop();
-    FetchDate(TodayOtherApi);
+    FetchDate(OtherApi);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

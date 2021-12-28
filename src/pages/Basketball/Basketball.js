@@ -5,7 +5,7 @@ import { ChangePageButton } from "../../global/ChangePage";
 import useHandleArticle from "../../global/useHandleArticle";
 import { ScrollToTop } from "../../global/Scroll";
 import { LoadingBox } from "../../global/Loading";
-import { TodayBasketballApi } from "../../global/API";
+import { BasketballApi } from "../../global/API";
 import presetBasketball from "../../images/presetBasketball.jpg";
 
 const MainTitle = styled.div`
@@ -43,7 +43,7 @@ export default function Basketball() {
   //以下是新增內容
   useEffect(() => {
     ScrollToTop();
-    FetchDate(TodayBasketballApi);
+    FetchDate(BasketballApi);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

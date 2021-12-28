@@ -28,15 +28,25 @@ function doHandleMonth(month) {
   return m;
 }
 
-let nowDate = getDay(0);
-let LastNowDate = getDay(-30);
+const sourse =
+  "anntw,anue,chinatimes,cmmedia,cna,ctee,ebc,epochtimes,ettoday,ftv,gvm,hinet,ltn,mirrormedia,newtalk,nownews,rti,setn,storm,thenewslens,ttv,tvbs,udn,upmedia,yahoo,yam";
 
-export const TodayBaseballApi = `${Source_API}?key=棒球&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=all`;
-export const TodayBasketballApi = `${Source_API}?key=籃球&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=all`;
-export const TodayFootballApi = `${Source_API}?key=足球&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=all`;
-export const TodayTennisApi = `${Source_API}?key=網球&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=all`;
-export const TodayVolleyballApi = `${Source_API}?key=排球&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=all`;
-export const TodayOtherApi = `${Source_API}?key=運動&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=all`;
+let nowDate = getDay(0);
+let LastNowDate = getDay(-15);
+
+export const TodayBaseballApi = `${Source_API}?key=棒球&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=${sourse}`;
+export const TodayBasketballApi = `${Source_API}?key=籃球&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=${sourse}`;
+export const TodayFootballApi = `${Source_API}?key=足球&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=${sourse}`;
+export const TodayTennisApi = `${Source_API}?key=網球&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=${sourse}`;
+export const TodayVolleyballApi = `${Source_API}?key=排球&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=${sourse}`;
+export const TodayOtherApi = `${Source_API}?key=運動&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=${sourse}`;
+
+export const BaseballApi = `${Source_API}?key=棒球&start_date=${LastNowDate}&end_date=${nowDate}&crawler_Web=${sourse}`;
+export const BasketballApi = `${Source_API}?key=籃球&start_date=${LastNowDate}&end_date=${nowDate}&crawler_Web=${sourse}`;
+export const FootballApi = `${Source_API}?key=足球&start_date=${LastNowDate}&end_date=${nowDate}&crawler_Web=${sourse}`;
+export const TennisApi = `${Source_API}?key=網球&start_date=${LastNowDate}&end_date=${nowDate}&crawler_Web=${sourse}`;
+export const VolleyballApi = `${Source_API}?key=排球&start_date=${LastNowDate}&end_date=${nowDate}&crawler_Web=${sourse}`;
+export const OtherApi = `${Source_API}?key=運動&start_date=${LastNowDate}&end_date=${nowDate}&crawler_Web=${sourse}`;
 
 export const AloneApi = (id) => {
   return `${Source_API}/${id}`;

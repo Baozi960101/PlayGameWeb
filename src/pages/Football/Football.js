@@ -5,7 +5,7 @@ import { ChangePageButton } from "../../global/ChangePage";
 import useHandleArticle from "../../global/useHandleArticle";
 import { ScrollToTop } from "../../global/Scroll";
 import { LoadingBox } from "../../global/Loading";
-import { TodayFootballApi } from "../../global/API";
+import { FootballApi } from "../../global/API";
 import presetFootball from "../../images/presetFootball.jpg";
 
 const MainTitle = styled.div`
@@ -43,7 +43,7 @@ export default function Football() {
   //以下是新增內容
   useEffect(() => {
     ScrollToTop();
-    FetchDate(TodayFootballApi);
+    FetchDate(FootballApi);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

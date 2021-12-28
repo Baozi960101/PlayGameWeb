@@ -6,6 +6,7 @@ import { SlugContext } from "../../global/context";
 import useHandleArticle from "../../global/useHandleArticle";
 import { LoadingBox } from "../../global/Loading";
 import presetBaseball from "../../images/presetBaseball.jpg";
+import presetSports from "../../images/presetSports.jpg";
 
 const MainBox = styled.div`
   display: flex;
@@ -85,7 +86,7 @@ const MainSinglePost = ({ src, title, content }) => {
   return (
     <MainBox>
       <ArticleCoverBox>
-        <ArticleCover src={src} />
+        <ArticleCover src={src === "" ? presetSports : src} />
       </ArticleCoverBox>
       <ArticleTitle>{title}</ArticleTitle>
       <ArticleContent>

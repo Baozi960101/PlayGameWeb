@@ -5,7 +5,7 @@ import { ChangePageButton } from "../../global/ChangePage";
 import useHandleArticle from "../../global/useHandleArticle";
 import { ScrollToTop } from "../../global/Scroll";
 import { LoadingBox } from "../../global/Loading";
-import { TodayVolleyballApi } from "../../global/API";
+import { VolleyballApi } from "../../global/API";
 import presetVolleyball from "../../images/presetVolleyball.jpg";
 
 const MainTitle = styled.div`
@@ -43,7 +43,7 @@ export default function Volleyball() {
   //以下是新增內容
   useEffect(() => {
     ScrollToTop();
-    FetchDate(TodayVolleyballApi);
+    FetchDate(VolleyballApi);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

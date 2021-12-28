@@ -46,7 +46,7 @@ const AnnouncementTitle = () => {
   return (
     <>
       <AnnouncementBox>
-        Trending
+        最新
         <Arrow alt="trending" src={trending} />
       </AnnouncementBox>
     </>
@@ -61,12 +61,23 @@ const SlideshowBox = styled.div`
   box-sizing: border-box;
 `;
 
-const MainAnnouncement = () => {
+const SlideshowText = styled.div`
+  display: flex;
+  align-items: center;
+  height: 69px;
+  box-sizing: border-box;
+  padding-left: 25px;
+  color: black;
+`;
+
+const MainAnnouncement = ({ content }) => {
   return (
     <>
       <Announcement>
         <AnnouncementTitle />
-        <SlideshowBox>{Slideshow()}</SlideshowBox>
+        <SlideshowBox>
+          <Slideshow content={content} />
+        </SlideshowBox>
       </Announcement>
     </>
   );
@@ -152,7 +163,19 @@ export default function Home() {
   return (
     <>
       {load && <LoadingBox />}
-      {/* <MainAnnouncement /> */}
+      <MainAnnouncement
+        content={honePageTopPost.map((data) => {
+          return (
+            <div className="each-slide">
+              <Goto to={`/${data.crawler_No}`}>
+                <SlideshowText>
+                  {data.crawler_Title.substring(0, 50)}
+                </SlideshowText>
+              </Goto>
+            </div>
+          );
+        })}
+      />
       {coverPost.map((data) => {
         return (
           <MainCoverPost
