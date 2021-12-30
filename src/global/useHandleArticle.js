@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { ScrollToTop } from "./Scroll";
-import { TodayBaseballApi, TodayBasketballApi } from "./API";
+import {
+  TodayBaseballApi,
+  TodayBasketballApi,
+  NewsApi,
+  SourceApi,
+} from "./API";
 
 //此包含引入所有文章以及換頁功能
 export default function useHandleArticle() {
@@ -34,11 +39,31 @@ export default function useHandleArticle() {
 
   async function homePageArticle() {
     setLoad(true);
-    const homeRes = await fetch(TodayBaseballApi);
+    const res = await fetch(SourceApi);
+    const { data } = await res.json();
+    const homeRes = await fetch(
+      NewsApi(
+        data.棒球
+          .map((item) => {
+            return item.source_Name;
+          })
+          .join(),
+        "baseball"
+      )
+    );
     const homedata01 = await homeRes.json();
     setCoverPost(homedata01.data.slice(0, 1));
     setHomePageTopPost(homedata01.data.slice(0, 9));
-    const homeRes02 = await fetch(TodayBasketballApi);
+    const homeRes02 = await fetch(
+      NewsApi(
+        data.籃球
+          .map((item) => {
+            return item.source_Name;
+          })
+          .join(),
+        "basketball"
+      )
+    );
     const homedata02 = await homeRes02.json();
     setHomePageBottomPost(homedata02.data.slice(0, 9));
     setLoad(false);
@@ -46,7 +71,18 @@ export default function useHandleArticle() {
 
   async function MoreLikeThisArticle() {
     setLoad(true);
-    const homeRes = await fetch(TodayBaseballApi);
+    const res = await fetch(SourceApi);
+    const { data } = await res.json();
+    const homeRes = await fetch(
+      NewsApi(
+        data.棒球
+          .map((item) => {
+            return item.source_Name;
+          })
+          .join(),
+        "baseball"
+      )
+    );
     const homedata01 = await homeRes.json();
     setPost(homedata01.data.slice(0, 3));
     setLoad(false);

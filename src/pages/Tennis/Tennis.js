@@ -5,7 +5,7 @@ import { ChangePageButton } from "../../global/ChangePage";
 import useHandleArticle from "../../global/useHandleArticle";
 import { ScrollToTop } from "../../global/Scroll";
 import { LoadingBox } from "../../global/Loading";
-import { TennisApi } from "../../global/API";
+import { SourceApi, NewsApi } from "../../global/API";
 import presetTennis from "../../images/presetTennis.jpg";
 
 const MainTitle = styled.div`
@@ -29,6 +29,22 @@ const Box = styled.div`
   box-sizing: border-box;
 `;
 
+async function fetchApi(FetchDate) {
+  const res = await fetch(SourceApi);
+  const { data } = await res.json();
+  // eslint-disable-next-line no-use-before-define
+  FetchDate(
+    NewsApi(
+      data.網球
+        .map((item) => {
+          return item.source_Name;
+        })
+        .join(),
+      "tennis"
+    )
+  );
+}
+
 export default function Tennis() {
   const {
     FetchDate,
@@ -36,14 +52,16 @@ export default function Tennis() {
     page,
     ChangeNextPage,
     ChangePrevPage,
+    setLoad,
     load,
     coverPost,
   } = useHandleArticle();
 
   //以下是新增內容
   useEffect(() => {
+    setLoad(true);
     ScrollToTop();
-    FetchDate(TennisApi);
+    fetchApi(FetchDate);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

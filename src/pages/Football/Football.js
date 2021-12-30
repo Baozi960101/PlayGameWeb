@@ -5,7 +5,7 @@ import { ChangePageButton } from "../../global/ChangePage";
 import useHandleArticle from "../../global/useHandleArticle";
 import { ScrollToTop } from "../../global/Scroll";
 import { LoadingBox } from "../../global/Loading";
-import { FootballApi } from "../../global/API";
+import { SourceApi, NewsApi } from "../../global/API";
 import presetFootball from "../../images/presetFootball.jpg";
 
 const MainTitle = styled.div`
@@ -29,6 +29,22 @@ const Box = styled.div`
   box-sizing: border-box;
 `;
 
+async function fetchApi(FetchDate) {
+  const res = await fetch(SourceApi);
+  const { data } = await res.json();
+  // eslint-disable-next-line no-use-before-define
+  FetchDate(
+    NewsApi(
+      data.足球
+        .map((item) => {
+          return item.source_Name;
+        })
+        .join(),
+      "football"
+    )
+  );
+}
+
 export default function Football() {
   const {
     FetchDate,
@@ -36,14 +52,16 @@ export default function Football() {
     page,
     ChangeNextPage,
     ChangePrevPage,
+    setLoad,
     load,
     coverPost,
   } = useHandleArticle();
 
   //以下是新增內容
   useEffect(() => {
+    setLoad(true);
     ScrollToTop();
-    FetchDate(FootballApi);
+    fetchApi(FetchDate);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -109,10 +109,9 @@ export default function SingleArticle() {
       fetch(AloneApi(aloneSlug))
         .then((res) => res.json())
         .then((data) => {
-          setSinglePost([data.data]);
+          setSinglePost([data.data[0]]);
         });
     }
-    return () => {};
   }, [aloneSlug]);
 
   useEffect(() => {

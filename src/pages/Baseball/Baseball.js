@@ -5,7 +5,7 @@ import { ChangePageButton } from "../../global/ChangePage";
 import useHandleArticle from "../../global/useHandleArticle";
 import { ScrollToTop } from "../../global/Scroll";
 import { LoadingBox } from "../../global/Loading";
-import { BaseballApi } from "../../global/API";
+import { SourceApi, NewsApi } from "../../global/API";
 import presetBaseball from "../../images/presetBaseball.jpg";
 
 const MainTitle = styled.div`
@@ -29,12 +29,29 @@ const Box = styled.div`
   box-sizing: border-box;
 `;
 
+async function fetchApi(FetchDate) {
+  const res = await fetch(SourceApi);
+  const { data } = await res.json();
+  // eslint-disable-next-line no-use-before-define
+  FetchDate(
+    NewsApi(
+      data.棒球
+        .map((item) => {
+          return item.source_Name;
+        })
+        .join(),
+      "baseball"
+    )
+  );
+}
+
 export default function Baseball() {
   const {
     post,
     page,
     ChangeNextPage,
     ChangePrevPage,
+    setLoad,
     load,
     coverPost,
     FetchDate,
@@ -42,8 +59,9 @@ export default function Baseball() {
 
   //以下是新增內容
   useEffect(() => {
+    setLoad(true);
     ScrollToTop();
-    FetchDate(BaseballApi);
+    fetchApi(FetchDate);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

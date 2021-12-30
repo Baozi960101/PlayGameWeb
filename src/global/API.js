@@ -1,10 +1,7 @@
 const Login_Api = `https://argus.work/argus/api/v1/auth/login`;
 const GetUserData_Api = `https://argus.work/argus/api/v1/auth/user-profile`;
 
-const Source_API = `https://argus.work/argus/api/v1/data`;
-
-export const playgames =
-  "https://api.hinduhope.com/api/v1/data/showWeb?groups_Type=playgames";
+const main_api = `https://sportfun.tw/sportfun/api/v1/data`;
 
 function getDay(day) {
   let today = new Date();
@@ -27,28 +24,11 @@ function doHandleMonth(month) {
   return m;
 }
 
-const sourse =
-  "anntw,anue,chinatimes,cmmedia,cna,ctee,ebc,epochtimes,ettoday,ftv,gvm,hinet,ltn,mirrormedia,newtalk,nownews,rti,setn,storm,thenewslens,ttv,tvbs,udn,upmedia,yahoo,yam";
-
 let nowDate = getDay(0);
-let LastNowDate = getDay(-15);
-
-export const TodayBaseballApi = `${Source_API}?key=棒球&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=${sourse}`;
-export const TodayBasketballApi = `${Source_API}?key=籃球&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=${sourse}`;
-export const TodayFootballApi = `${Source_API}?key=足球&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=${sourse}`;
-export const TodayTennisApi = `${Source_API}?key=網球&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=${sourse}`;
-export const TodayVolleyballApi = `${Source_API}?key=排球&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=${sourse}`;
-export const TodayOtherApi = `${Source_API}?key=運動&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=${sourse}`;
-
-export const BaseballApi = `${Source_API}?key=棒球&start_date=${LastNowDate}&end_date=${nowDate}&crawler_Web=${sourse}`;
-export const BasketballApi = `${Source_API}?key=籃球&start_date=${LastNowDate}&end_date=${nowDate}&crawler_Web=${sourse}`;
-export const FootballApi = `${Source_API}?key=足球&start_date=${LastNowDate}&end_date=${nowDate}&crawler_Web=${sourse}`;
-export const TennisApi = `${Source_API}?key=網球&start_date=${LastNowDate}&end_date=${nowDate}&crawler_Web=${sourse}`;
-export const VolleyballApi = `${Source_API}?key=排球&start_date=${LastNowDate}&end_date=${nowDate}&crawler_Web=${sourse}`;
-export const OtherApi = `${Source_API}?key=運動&start_date=${LastNowDate}&end_date=${nowDate}&crawler_Web=${sourse}`;
+let LastNowDate = getDay(-10);
 
 export const AloneApi = (id) => {
-  return `${Source_API}/${id}`;
+  return `${main_api}/${id}`;
 };
 
 export function LoginApi(account, password) {
@@ -71,3 +51,9 @@ export const FirstCheckUser = (token) => {
     },
   });
 };
+
+export const SourceApi = `${main_api}/showWeb`;
+
+export function NewsApi(sourse, name) {
+  return `${main_api}?start_date=${LastNowDate}&end_date=${nowDate}&crawler_Web=${sourse}&crawler_Cate=${name}`;
+}

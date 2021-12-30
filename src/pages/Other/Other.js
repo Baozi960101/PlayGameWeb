@@ -5,7 +5,7 @@ import { ChangePageButton } from "../../global/ChangePage";
 import useHandleArticle from "../../global/useHandleArticle";
 import { ScrollToTop } from "../../global/Scroll";
 import { LoadingBox } from "../../global/Loading";
-import { OtherApi } from "../../global/API";
+import { SourceApi, NewsApi } from "../../global/API";
 import presetSports from "../../images/presetSports.jpg";
 
 const MainTitle = styled.div`
@@ -29,6 +29,22 @@ const Box = styled.div`
   box-sizing: border-box;
 `;
 
+async function fetchApi(FetchDate) {
+  const res = await fetch(SourceApi);
+  const { data } = await res.json();
+  // eslint-disable-next-line no-use-before-define
+  FetchDate(
+    NewsApi(
+      data.其他
+        .map((item) => {
+          return item.source_Name;
+        })
+        .join(),
+      "other"
+    )
+  );
+}
+
 export default function Other() {
   const {
     FetchDate,
@@ -36,14 +52,16 @@ export default function Other() {
     page,
     ChangeNextPage,
     ChangePrevPage,
+    setLoad,
     load,
     coverPost,
   } = useHandleArticle();
 
   //以下是新增內容
   useEffect(() => {
+    setLoad(true);
     ScrollToTop();
-    FetchDate(OtherApi);
+    fetchApi(FetchDate);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
