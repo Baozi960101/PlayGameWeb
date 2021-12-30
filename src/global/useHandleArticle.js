@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { ScrollToTop } from "./Scroll";
 import {
-  TodayBaseballApi,
-  TodayBasketballApi,
-  NewsApi,
+  NewsTodayApi,
   SourceApi,
 } from "./API";
 
@@ -42,7 +40,7 @@ export default function useHandleArticle() {
     const res = await fetch(SourceApi);
     const { data } = await res.json();
     const homeRes = await fetch(
-      NewsApi(
+      NewsTodayApi(
         data.棒球
           .map((item) => {
             return item.source_Name;
@@ -55,7 +53,7 @@ export default function useHandleArticle() {
     setCoverPost(homedata01.data.slice(0, 1));
     setHomePageTopPost(homedata01.data.slice(0, 9));
     const homeRes02 = await fetch(
-      NewsApi(
+      NewsTodayApi(
         data.籃球
           .map((item) => {
             return item.source_Name;
@@ -74,7 +72,7 @@ export default function useHandleArticle() {
     const res = await fetch(SourceApi);
     const { data } = await res.json();
     const homeRes = await fetch(
-      NewsApi(
+      NewsTodayApi(
         data.棒球
           .map((item) => {
             return item.source_Name;

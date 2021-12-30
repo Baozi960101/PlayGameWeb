@@ -25,6 +25,7 @@ function doHandleMonth(month) {
 }
 
 let nowDate = getDay(0);
+let littleDate = getDay(-3);
 let LastNowDate = getDay(-10);
 
 export const AloneApi = (id) => {
@@ -53,6 +54,10 @@ export const FirstCheckUser = (token) => {
 };
 
 export const SourceApi = `${main_api}/showWeb`;
+
+export function NewsTodayApi(sourse, name) {
+  return `${main_api}?start_date=${littleDate}&end_date=${nowDate}&crawler_Web=${sourse}&crawler_Cate=${name}`;
+}
 
 export function NewsApi(sourse, name) {
   return `${main_api}?start_date=${LastNowDate}&end_date=${nowDate}&crawler_Web=${sourse}&crawler_Cate=${name}`;
